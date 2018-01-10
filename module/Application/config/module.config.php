@@ -36,6 +36,27 @@ return [
                     ],
                 ],
             ],
+            // Add this route for Download Controller
+            'download' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/download[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\DownloadController::class,
+                        'action'     => 'index'
+                    ],
+                ],
+            ],
+            'getJson' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/getJson',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action' => 'getJson'
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -43,6 +64,7 @@ return [
 //            Controller\IndexController::class => InvokableFactory::class,
             Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
 //            Controller\IndexController::class => LazyControllerAbstractFactory::class,
+        Controller\DownloadController::class => InvokableFactory::class,
         ],
     ],
     'service_manager' => [
@@ -68,6 +90,14 @@ return [
             // Specify here wich services must be non-shared
         ],
     ],
+    'controller_plugins' => [
+        'factories' => [
+            Controller\Plugin\AccessPlugin::class => InvokableFactory::class,
+        ],
+        'aliases' => [
+            'access' => Controller\Plugin\AccessPlugin::class,
+        ],
+    ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -82,6 +112,9 @@ return [
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
+        ],
+        'strategies' => [
+            'ViewJsonStrategy',
         ],
     ],
 ];
