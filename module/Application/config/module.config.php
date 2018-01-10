@@ -10,6 +10,8 @@ namespace Application;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\Mvc\Controller\LazyControllerAbstractFactory;
+use Application\Service\CurrencyConverter;
 
 return [
     'router' => [
@@ -38,7 +40,32 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+//            Controller\IndexController::class => InvokableFactory::class,
+            Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
+//            Controller\IndexController::class => LazyControllerAbstractFactory::class,
+        ],
+    ],
+    'service_manager' => [
+        'services' => [
+            // Register service class instances here
+        ],
+        'invokables' => [
+            // Register invokables class here
+        ],
+        'factories' => [
+            // register CurrencyConverter service
+//            CurrencyConverter::class => InvokableFactory::class
+            Service\CurrencyConverter::class => InvokableFactory::class,
+//            Service\CurrencyConverter::class => Service\Factory\PostManagerFactory::class,
+        ],
+        'abstract_factories' => [
+            // Register abstract factories here
+        ],
+        'aliases' => [
+            // Register service aliases here
+        ],
+        'shared' => [
+            // Specify here wich services must be non-shared
         ],
     ],
     'view_manager' => [
