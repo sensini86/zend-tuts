@@ -81,4 +81,23 @@ class IndexController extends AbstractActionController
             ],
         ]);
     }
+
+    public function docAction()
+    {
+        $pageTemplate = 'application/index/doc' . $this->params()->fromRoute('page', 'documentation.phtml');
+
+        $filePath = __DIR__ . '/../../view/'. $pageTemplate . '.phtml';
+        
+        if (!file_exists($filePath) || !is_readable($filePath)) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        $viewModel = new ViewModel([
+            'page' => $pageTemplate
+        ]);
+        $viewModel->setTemplate($pageTemplate);
+
+        return $viewModel;
+    }
 }
