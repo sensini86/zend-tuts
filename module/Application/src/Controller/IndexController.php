@@ -92,7 +92,6 @@ class IndexController extends AbstractActionController
             $this->getResponse()->setStatusCode(404);
             return;
         }
-
         $viewModel = new ViewModel([
             'page' => $pageTemplate
         ]);
