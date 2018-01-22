@@ -99,4 +99,19 @@ class IndexController extends AbstractActionController
 
         return $viewModel;
     }
+
+    public function staticAction()
+    {
+        $pageTemplate = $this->params()->fromRoute('page', null);
+        if ($pageTemplate==null) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        $viewModel = new ViewModel([
+            'page' => $pageTemplate
+        ]);
+        $viewModel->setTemplate($pageTemplate);
+        return $viewModel;
+    }
 }
