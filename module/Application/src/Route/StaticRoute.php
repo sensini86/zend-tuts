@@ -56,7 +56,7 @@ class StaticRoute implements RouteInterface
         if (!isset($options['defaults'])) {
             $options['defaults'] = [];
         }
-        
+
         return new static(
             $options['dir_name'],
             $options['template_prefix'],
