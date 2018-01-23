@@ -24,6 +24,43 @@
         ?>
     </head>
     <body>
+    <!-- Navigation bar -->
+    <?php
+    $this->mainMenu()->setItems([
+        [
+            'id' => 'home',
+            'label' => 'Home',
+            'link' => $this->url('home')
+        ],
+        [
+            'id' => 'downloads',
+            'label' => 'Downloads',
+            'link' => $this->url("application", ['action'=>'downloads'])
+        ],
+        [
+            'id' => 'support',
+            'label' => 'Support',
+            'dropdown' => [
+                [
+                    'id' => 'documentation',
+                    'label' => 'Documentation',
+                    'link' => $this->url('doc', ['page'=>'contents'])
+                ],
+                [
+                    'id' => 'help',
+                    'label' => 'Help',
+                    'link' => $this->url('static', ['page'=>'help'])
+                ]
+            ]
+        ]
+    ]);
+
+    echo $this->mainMenu()->render();
+    ?>
+    <?= $this->pageBreadcrumbs()->render(); ?>
+
+    <?php
+    /*
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -43,6 +80,9 @@
                 </div>
             </div>
         </nav>
+    */
+    ?>
+
         <div class="container">
             <?= $this->content ?>
             <hr>

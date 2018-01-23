@@ -142,6 +142,15 @@ return [
             'ViewJsonStrategy',
         ],
     ],
-
+    'view_helpers' => [
+        'factories' => [
+            View\Helper\Menu::class => InvokableFactory::class,
+            View\Helper\Breadcrumbs::class => InvokableFactory::class,
+        ],
+        'aliases' => [
+            'mainMenu' => View\Helper\Menu::class,
+            'pageBreadcrumbs' => View\Helper\Breadcrumbs::class,
+        ],
+    ],
 
 ];
