@@ -127,7 +127,7 @@ class ContactForm extends Form
 
         $this->add([
             'type'  => 'submit',
-            'name'  => 'Submit',
+            'name'  => 'submit',
             'attributes' => [
                 'value' => 'Submit'
             ],

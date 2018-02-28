@@ -99,7 +99,8 @@ return [
 //            Controller\IndexController::class => InvokableFactory::class,
             Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
 //            Controller\IndexController::class => LazyControllerAbstractFactory::class,
-        Controller\DownloadController::class => InvokableFactory::class,
+            Controller\DownloadController::class => InvokableFactory::class,
+            Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
         ],
     ],
     'service_manager' => [
@@ -114,6 +115,7 @@ return [
 //            CurrencyConverter::class => InvokableFactory::class
             Service\CurrencyConverter::class => InvokableFactory::class,
 //            Service\CurrencyConverter::class => Service\Factory\PostManagerFactory::class,
+            Service\MailSender::class => InvokableFactory::class
         ],
         'abstract_factories' => [
             // Register abstract factories here

@@ -22,9 +22,16 @@ class IndexController extends AbstractActionController
      */
     private $currencyConverter;
 
-    public function __construct($currencyConverter)
+    /**
+     * Mail Sender
+     * @var Application\Service\MailSender
+     */
+    private $mailSender;
+
+    public function __construct($currencyConverter, $mailSender)
     {
         $this->currencyConverter = $currencyConverter;
+        $this->mailSender = $mailSender;
     }
 
     public function indexAction()
@@ -137,7 +144,15 @@ class IndexController extends AbstractActionController
                 // get filtered and validated data
                 $data = $form->getData();
 
-                // do sth ...
+
+                $email = $data['email'];
+                $subject = $data['subject'];
+                $body = $data['body'];
+
+                // Send E-mail
+                if (!$this->mailSender->sendMail('sezgin.cholak@gmail.com', $email, $subject, $body)) {
+                    return $this->redirect()->toRoute('application', ['action' => 'sendError']);
+                }
 
                 // redirect to thank you page
                 return $this->redirect()->toRoute('application', ['action' => 'thankYou']);
@@ -149,8 +164,18 @@ class IndexController extends AbstractActionController
             'form' => $form
         ]);
 
-        return new ViewModel([
-            'form' => $data
-        ]);
+//        return new ViewModel([
+//            'form' => $data
+//        ]);
+    }
+
+    public function thankYouAction()
+    {
+        return new ViewModel();
+    }
+
+    public function sendErrorAction()
+    {
+        return new ViewModel();
     }
 }

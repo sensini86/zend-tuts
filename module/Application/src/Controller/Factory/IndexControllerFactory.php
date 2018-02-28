@@ -4,6 +4,7 @@ namespace Application\Controller\Factory;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Application\Service\CurrencyConverter;
+use Application\Service\MailSender;
 use Application\Controller\IndexController;
 
 
@@ -22,7 +23,10 @@ class IndexControllerFactory implements FactoryInterface
         // Get the instance of CurrencyConverter service from the service manager.
         $currencyConverter = $container->get(CurrencyConverter::class);
 
+        // mail service inject
+        $mailSender = $container->get(MailSender::class);
+
         // Create an instance of the controller and pass the dependency to controller's constructor
-        return new IndexController($currencyConverter);
+        return new IndexController($currencyConverter, $mailSender);
     }
 }
