@@ -82,6 +82,16 @@ return [
                     ]
                 ],
             ],
+            'contactus' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/contactus',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action' => 'contactUs'
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
