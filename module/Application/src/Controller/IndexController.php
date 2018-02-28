@@ -62,6 +62,8 @@ class IndexController extends AbstractActionController
 
 //        exit;
 
+
+
         $appName        = 'HelloWorld';
         $appDescription = 'A sample application for the Using Zend Framework 3 book';
 
